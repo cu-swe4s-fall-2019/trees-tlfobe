@@ -8,6 +8,14 @@ class TestNode(unittest.TestCase):
         assert node.key == 10
         assert node.left is None
         assert node.right is None
+        assert node.value == 10
+
+    def test_single_node_hash(self):
+        node = binary_tree.Node(10, 'string!')
+        assert node.key == 10
+        assert node.left is None
+        assert node.right is None
+        assert node.value == 'string!'
 
     def test_incorrect_child(self):
         self.assertRaises(TypeError, binary_tree.Node,
