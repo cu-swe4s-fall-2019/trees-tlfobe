@@ -1,3 +1,6 @@
 [submodule "hash-tables-tlfobe"]
 	path = hash-tables-tlfobe
 	url = https://github.com/cu-swe4s-fall-2019/hash-tables-tlfobe.git
+[submodule "avl_tree"]
+	path = avl_tree
+	url = https://github.com/swe4s/avl_tree.git
