@@ -13,3 +13,4 @@ before_install:
       
 script:
     - pycodestyle *.py
+    - python -m unittest test_binary_tree.py
