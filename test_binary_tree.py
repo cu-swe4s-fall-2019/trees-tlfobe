@@ -17,13 +17,53 @@ class TestNode(unittest.TestCase):
         assert node.right is None
         assert node.value == 'string!'
 
-    def test_incorrect_child(self):
+    def test_node_incorrect_child(self):
         self.assertRaises(TypeError, binary_tree.Node,
                           10, 10, left=10, right=20)
 
-    def test_correct_child(self):
+    def test_node_correct_child(self):
         left_child = binary_tree.Node(4)
         right_child = binary_tree.Node(16)
         node = binary_tree.Node(10, left=left_child, right=right_child)
         assert node.left.key == 4
         assert node.right.key == 16
+
+
+class TestBinaryTree(unittest.TestCase):
+    def test_binary_tree_init_no_in(self):
+        bt = binary_tree.BinaryTree()
+        assert bt.tree is None
+
+    def test_binary_tree_init_values(self):
+        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0])
+        assert bt.tree.value == 1
+        assert bt.tree.right.value == 2
+        assert bt.tree.right.right.value == 3
+        assert bt.tree.right.right.right.value == 4
+        assert bt.tree.left.value == 0
+
+    def test_binary_tree_wrong_types(self):
+        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0])
+        self.assertRaises(TypeError, bt.insert, 'string')
+
+    def test_binary_tree_insert(self):
+        bt = binary_tree.BinaryTree()
+        bt.insert(10)
+        bt.insert(11)
+        bt.insert(9)
+        assert bt.tree.left.value == 9
+        assert bt.tree.right.value == 11
+    
+    def test_binary_tree_init_key_value(self):
+        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0], values=['one', 'two', 'three', 'four', 'zero'])
+        assert bt.tree.key == 1
+        assert bt.tree.right.key == 2
+        assert bt.tree.right.right.key == 3
+        assert bt.tree.right.right.right.key == 4
+        assert bt.tree.left.key == 0
+        assert bt.tree.value == 'one'
+        assert bt.tree.right.value == 'two'
+        assert bt.tree.right.right.value == 'three'
+        assert bt.tree.right.right.right.value == 'four'
+        assert bt.tree.left.value == 'zero'
+
