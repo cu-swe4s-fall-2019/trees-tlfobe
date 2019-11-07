@@ -74,6 +74,10 @@ class BinaryTree:
         if keys:
             if values is None:
                 values = keys
+            if not isinstance(keys, list) and not isinstance(values, list):
+                raise TypeError("BinaryTree: keys and values inputs must be lists!")
+            if len(values) != len(keys):
+                raise IndexError("BinaryTree: input keys and values list must be the same length!")
             for key, value in zip(keys, values):
                 self.insert(key, value)
         
@@ -102,13 +106,51 @@ class BinaryTree:
                         node.left = Node(key, value = value)
                     else:
                         self.insert(key, value = value, node = node.left)
-            except TypeError:
-                    raise TypeError("BinaryTree: Cannot compare types, " + str(type(key) + " with " +str(type(node.key)))) 
-            else:
-                if node.right is None:
-                    node.right = Node(key, value = value)
                 else:
-                    self.insert(key, value = value, node = node.right)                
+                    if node.right is None:
+                        node.right = Node(key, value = value)
+                    else:
+                        self.insert(key, value = value, node = node.right)
+            except TypeError:
+                    raise TypeError("BinaryTree: Cannot compare types, " + str(type(key) + " with " +str(type(node.key))))                 
 
-    def search(self, root, key):
-        return None
+    def search(self, key, node = None):
+        """
+        search keys/value pairs within BinaryTree object
+
+        Arguments
+        ---------
+        key : anything
+            variable used for traveling through the tree
+        node : Node
+            node to search for key, primarily used in recursion
+        """
+        print("recursion!")
+        if self.tree is None:
+            return -1
+        else:
+            if node is None:
+                node = self.tree
+            try:
+               key > node.key
+            except TypeError:
+                raise TypeError("BinaryTree: Cannot compare types, " + str(type(key) + " with " +str(type(node.key))))  
+            if key < node.key:
+                print("LEFT!")
+                if node.left is None:
+                    return -1
+                else:
+                    return self.search(key, node = node.left)
+            if key > node.key:
+                print("RIGHT!")
+                if node.right is None:
+                    return -1
+                else:
+                    return self.search(key, node = node.right)
+            if key == node.key:
+                print("FOUND IT!")
+                print(node.value)
+                print(node.key)
+                print(key)
+                print(key == node.key)
+                return node.value
