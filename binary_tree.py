@@ -67,7 +67,8 @@ class BinaryTree:
         ---------
         keys : list
             list of keys used in binary tree
-
+        values : list
+            list of values used to be matched with supplied keys
         """
         self.tree = None
         if keys:
@@ -77,6 +78,18 @@ class BinaryTree:
                 self.insert(key, value)
         
     def insert(self, key, value=None, node = None):
+        """
+        insert keys/values into binary tree
+
+        Arguments
+        ---------
+        key : anything
+            variable used for traveling through the tree
+        value : anything
+            variable stored at the given key site
+        node : Node
+            node to insert value, primarily used in recursion
+        """
         if self.tree is None:
             self.tree = Node(key, value = value)
             self.type = type(key)
