@@ -131,7 +131,6 @@ class BinaryTree:
         node : Node
             node to search for key, primarily used in recursion
         """
-        print("recursion!")
         if self.tree is None:
             return -1
         else:
@@ -144,21 +143,14 @@ class BinaryTree:
                                 str(type(key) + " with " +
                                     str(type(node.key))))
             if key < node.key:
-                print("LEFT!")
                 if node.left is None:
                     return -1
                 else:
                     return self.search(key, node=node.left)
             if key > node.key:
-                print("RIGHT!")
                 if node.right is None:
                     return -1
                 else:
                     return self.search(key, node=node.right)
             if key == node.key:
-                print("FOUND IT!")
-                print(node.value)
-                print(node.key)
-                print(key)
-                print(key == node.key)
                 return node.value
