@@ -31,17 +31,19 @@ class TestNode(unittest.TestCase):
 
 class TestBinaryTree(unittest.TestCase):
     def test_binary_tree_incorrect_input(self):
-        self.assertRaises(TypeError, binary_tree.BinaryTree, keys = 'string!', values = 100)
+        self.assertRaises(TypeError, binary_tree.BinaryTree,
+                          keys='string!', values=100)
 
     def test_binary_tree_init_incorrect_lists(self):
-        self.assertRaises(IndexError, binary_tree.BinaryTree, keys = [1,2,3,4], values = ['a', 'b','c'])
+        self.assertRaises(IndexError, binary_tree.BinaryTree, keys=[
+                          1, 2, 3, 4], values=['a', 'b', 'c'])
 
     def test_binary_tree_init_no_in(self):
         bt = binary_tree.BinaryTree()
         assert bt.tree is None
 
     def test_binary_tree_init_values(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0])
         assert bt.tree.value == 1
         assert bt.tree.right.value == 2
         assert bt.tree.right.right.value == 3
@@ -49,7 +51,7 @@ class TestBinaryTree(unittest.TestCase):
         assert bt.tree.left.value == 0
 
     def test_binary_tree_wrong_types(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0])
         self.assertRaises(TypeError, bt.insert, 'string')
 
     def test_binary_tree_insert(self):
@@ -59,9 +61,10 @@ class TestBinaryTree(unittest.TestCase):
         bt.insert(9)
         assert bt.tree.left.value == 9
         assert bt.tree.right.value == 11
-    
+
     def test_binary_tree_init_key_value(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0], values=['one', 'two', 'three', 'four', 'zero'])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0], values=[
+                                    'one', 'two', 'three', 'four', 'zero'])
         assert bt.tree.key == 1
         assert bt.tree.right.key == 2
         assert bt.tree.right.right.key == 3
@@ -74,7 +77,8 @@ class TestBinaryTree(unittest.TestCase):
         assert bt.tree.left.value == 'zero'
 
     def test_binary_tree_search(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0], values=['one', 'two', 'three', 'four', 'zero'])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0], values=[
+                                    'one', 'two', 'three', 'four', 'zero'])
         assert bt.search(1) == 'one'
         assert bt.search(2) == 'two'
         assert bt.search(3) == 'three'
@@ -82,7 +86,8 @@ class TestBinaryTree(unittest.TestCase):
         assert bt.search(0) == 'zero'
 
     def test_binary_tree_search_no_find(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0], values=['one', 'two', 'three', 'four', 'zero'])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0], values=[
+                                    'one', 'two', 'three', 'four', 'zero'])
         assert bt.search(11) == -1
         assert bt.search(100) == -1
         bt.insert(11, value='eleven')
@@ -91,9 +96,8 @@ class TestBinaryTree(unittest.TestCase):
         assert bt.search(100) == 'hundred'
 
     def test_binary_tree_mixed_key_value_no_value(self):
-        bt = binary_tree.BinaryTree(keys = [1,2,3,4,0], values=['one', 'two', 'three', 'four', 'zero'])
+        bt = binary_tree.BinaryTree(keys=[1, 2, 3, 4, 0], values=[
+                                    'one', 'two', 'three', 'four', 'zero'])
         bt.insert(23)
         assert bt.search(23) == 23
         assert bt.search(1) == 'one'
-
-
