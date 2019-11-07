@@ -59,7 +59,7 @@ def main():
             for _ in range(int(args.number)):
                 kv_pairs.append([selection["key"](), selection["value"]()])
             if eval(args.sorted):
-                kv_pairs.sort(key = lambda x: x[0])
+                kv_pairs.sort(key=lambda x: x[0])
             lines = [str(kv[0])+" "+str(kv[1])+"\n" for kv in kv_pairs]
             fh.writelines(lines)
     except PermissionError:
