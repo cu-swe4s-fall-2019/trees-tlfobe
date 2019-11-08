@@ -49,9 +49,9 @@ def main():
                         default="10000",
                         )
     parser.add_argument("--sub_sample",
-                        help = "number of samples to test searching",
+                        help="number of samples to test searching",
                         default="0.2"
-    )
+                        )
 
     args = parser.parse_args()
 
@@ -77,14 +77,15 @@ def main():
 
     # Time it takes to search subset of data
 
-    sample_keys = random.sample(keys, round(int(args.n_values)*float(args.sub_sample)))
+    sample_keys = random.sample(keys, round(
+        int(args.n_values)*float(args.sub_sample)))
     search_times = []
     for key in sample_keys:
         t0 = time.time()
         val = data_struct_instance.search(key)
         t1 = time.time()
         search_times.append(t1 - t0)
-    
+
     # Time it takes to search for not in database
     not_in_db = []
     while len(not_in_db) < int(args.n_values)*float(args.sub_sample):
@@ -98,11 +99,11 @@ def main():
         t1 = time.time()
         not_in_db_times.append(t1 - t0)
         assert val == -1
-    
+
     print(add_times)
     print(search_times)
     print(not_in_db_times)
-        
+
 
 if __name__ == "__main__":
     main()
