@@ -1,5 +1,6 @@
 import binary_tree
 import sys
+import os
 import argparse
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
 sys.path.insert(1, "avl_tree")  # noqa: E402
@@ -8,15 +9,25 @@ import avl
 
 
 def get_key_value_pairs_from_file(file):
+    if not os.path.isfile(file):
+        raise FileNotFoundError(
+            "get_key_value_pairs_from_file: File not found!")
+    if os.path.isdir(file):
+        raise IsADirectoryError(
+            "get_key_value_pairs_from_file: Input not a file!")
+
     keys = []
     values = []
     with open(file, "r") as fh:
         for line in fh:
-            values = line.rstrip().split(' ')
-            keys.append(values[0])
-            values.append(values[1])
-
-    return(keys, values)
+            line_data = line.rstrip().split(' ')
+            if len(line_data) != 2:
+                raise IOError(
+                    "get_key_value_pairs_from_file: Incorrect file format")
+            print(line_data)
+            keys.append(line_data[0])
+            values.append(line_data[1])
+    return keys, values
 
 
 def main():
