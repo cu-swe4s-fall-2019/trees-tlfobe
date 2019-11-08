@@ -2,6 +2,7 @@ import binary_tree
 import sys
 import os
 import argparse
+import time
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
 sys.path.insert(1, "avl_tree")  # noqa: E402
 import hash_tables
@@ -56,9 +57,12 @@ def main():
 
     # Load in Data
 
-    key, values = get_key_value_pairs_from_file(args.data_file)
+    keys, values = get_key_value_pairs_from_file(args.data_file)
 
     # Time it takes to insert
+    t0 = time.time()
+    for key, value in zip(keys, values):
+        data_struct.add()
 
     # Time it takes to search subset of data
 
