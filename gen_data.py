@@ -7,7 +7,7 @@ def random_string():
     """
     generate a randome word key
     """
-    word_length = random.randint(1, 15)
+    word_length = random.randint(4, 15)
     word = ""
     for _ in range(word_length):
         word += chr(random.randint(97, 122))
