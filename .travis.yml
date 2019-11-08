@@ -10,7 +10,10 @@ before_install:
     - conda activate test
     - conda install -y pycodestyle
     - conda install --yes python=3.6
-      
+    - python gen_data.py --key_type string --value_type string --sorted False --outfile rand.txt
+    - python gen_data.py --key_type string --value_type string --sorted True --outfile sorted.txt
 script:
     - pycodestyle *.py
     - python -m unittest test_binary_tree.py
+    - python -m unittest test_insert_key_value_pairs.py
+    - python -m unittest test_gen_data.py

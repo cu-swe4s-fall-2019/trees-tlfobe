@@ -15,7 +15,7 @@ class TestGetKeyValuePairsFromFile(unittest.TestCase):
 
     def test_read_file(self):
         keys, values = insert_key_value_pairs.get_key_value_pairs_from_file(
-            "test.txt")
+            "test.txt", 10000)
         assert len(keys) == 10000
         assert len(values) == 10000
 
@@ -23,19 +23,26 @@ class TestGetKeyValuePairsFromFile(unittest.TestCase):
         self.assertRaises(
             FileNotFoundError,
             insert_key_value_pairs.get_key_value_pairs_from_file,
-            "not_file.txt")
+            "not_file.txt", 10000)
 
     def test_get_key_value_pair_from_file_dir(self):
         self.assertRaises(
             FileNotFoundError,
             insert_key_value_pairs.get_key_value_pairs_from_file,
-            "avl_tree")
+            "avl_tree", 10000)
 
     def test_get_key_value_pair_from_file_bad_format(self):
         self.assertRaises(
             IOError,
             insert_key_value_pairs.get_key_value_pairs_from_file,
-            "test2.txt")
+            "test2.txt", 3)
+
+    def test_get_n_key_value_pair_from_file(self):
+        keys, values = insert_key_value_pairs.get_key_value_pairs_from_file(
+            "test.txt", 40)
+        assert len(keys) == 40
+        assert len(values) == 40
+
 
     def tearDown(self):
         os.remove('test.txt')
