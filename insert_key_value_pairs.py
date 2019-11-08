@@ -6,6 +6,7 @@ sys.path.insert(1, "avl_tree")  # noqa: E402
 import hash_tables
 import avl
 
+
 def get_key_value_pairs_from_file(file):
     keys = []
     values = []
@@ -16,8 +17,6 @@ def get_key_value_pairs_from_file(file):
             values.append(values[1])
 
     return(keys, values)
-            
-
 
 
 def main():
@@ -39,7 +38,8 @@ def main():
 
     args = parser.parse_args()
 
-    str_to_data_strct_map = {"hash":hash_tables.ChainedHash, "AVL":avl.AVL, "tree":binary_tree.BinaryTree}
+    str_to_data_strct_map = {"hash": hash_tables.ChainedHash,
+                             "AVL": avl.AVL, "tree": binary_tree.BinaryTree}
 
     data_struct = str_to_data_strct_map[args.data_struct]
 
@@ -49,11 +49,10 @@ def main():
 
     # Time it takes to insert
 
-
     # Time it takes to search subset of data
 
-
     # Time it takes to search for not in database
+
 
 if __name__ == "__main__":
     main()
