@@ -166,10 +166,10 @@ class AVLTree(BinaryTree):
         right_height = -1 if node.right is None else node.right.height
 
         if left_height > right_height:
-            left_height =
-            -1 if node.left.left is None else node.left.left.height
-            right_height =
-            -1 if node.left.right is None else node.left.right.height
+            left_height = \
+                -1 if node.left.left is None else node.left.left.height
+            right_height = \
+                -1 if node.left.right is None else node.left.right.height
             if left_height > right_height:
                 # Left Left --> Right rotate
                 node = self.right_rotate(node)
