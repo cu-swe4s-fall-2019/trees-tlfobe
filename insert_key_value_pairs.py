@@ -1,4 +1,3 @@
-import hash_tables
 import avl_tree
 import gen_data
 import random
@@ -11,6 +10,8 @@ import argparse
 import matplotlib
 matplotlib.use('Agg')
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
+import hash_tables # noqa: E402
+
 
 sys.setrecursionlimit(20000)
 
@@ -87,7 +88,7 @@ def main():
         t0 = time.time()
         data_struct_instance.insert(key, value)
         t1 = time.time()
-        add_times.append(t1 - t0)
+        add_times.append(10e6*(t1 - t0))
 
     # Time it takes to search subset of data
 
@@ -98,7 +99,7 @@ def main():
         t0 = time.time()
         val = data_struct_instance.search(key)
         t1 = time.time()
-        search_times.append(t1 - t0)
+        search_times.append(10e6*(t1 - t0))
 
     # Time it takes to search for not in database
     not_in_db = []
@@ -111,7 +112,7 @@ def main():
         t0 = time.time()
         val = data_struct_instance.search(key)
         t1 = time.time()
-        not_in_db_times.append(t1 - t0)
+        not_in_db_times.append(10e6*(t1 - t0))
         assert val == -1
 
     plt.subplots_adjust(wspace=5)
@@ -128,14 +129,11 @@ def main():
 
     ax[0].boxplot(add_times)
     ax[0].set_xlabel(args.data_struct + " Add Time")
-    ax[0].set_ylabel("Time (seconds)")
-    ax[0].tick_params(labelsize=6)
+    ax[0].set_ylabel("Time (microseconds)")
     ax[1].boxplot(search_times)
     ax[1].set_xlabel(args.data_struct + " Search Time")
-    ax[1].tick_params(labelsize=6)
     ax[2].boxplot(not_in_db_times)
     ax[2].set_xlabel(args.data_struct + " Full Search Time")
-    ax[2].tick_params(labelsize=6)
 
     if args.outfile.split(".")[-1] != "png":
         args.outfile += ".png"

@@ -61,3 +61,5 @@ Lastly, we'll compare how the Chained Hash performs on the ordered keys. At 100 
 
 
 ## Conclusions
+
+In both instances we see the sorted data performs less well poor performance with sorted values. While trees are a useful data structure, hash tables generally outperformed trees.
