@@ -1,12 +1,22 @@
-from binary_tree import Node
 from binary_tree import BinaryTree
 
-class AVLNode(Node):
+class AVLNode():
     """
     AVL Node for building an AVL tree
     """
     def __init__(self, key, value=None, left=None, right=None):
-        Node.__init__(self, key, value=None, left=None, right=None)
+        if left is not None:
+            if not isinstance(left, AVLNode):
+                raise TypeError("Node: left children must be Node object!")
+        if right is not None:
+            if not isinstance(right, AVLNode):
+                raise TypeError("Node: right children must be Node object!")
+        self.key = key
+        self.value = value
+        self.left = left
+        self.right = right
+        if self.value is None:
+            self.value = key        
         self.height = 0
         self.balance_factor = 0
 
@@ -81,32 +91,49 @@ class AVLTree(BinaryTree):
                 node = self.tree
             try:
                 if key < node.key:
+                    direct = "left"
                     if node.left is None:
                         node.left = AVLNode(key, value=value)
                     else:
                         self.insert(key, value=value, node=node.left, parent=node)
                 else:
+                    direct = "right"
                     if node.right is None:
                         node.right = AVLNode(key, value=value)
                     else:
                         self.insert(key, value=value, node=node.right, parent=node)
                 node.height += 1
-                if node.left == None:
-                    left_height = -1
-                else:
-                    left_height = node.left.height
-                if node.right == None:
-                    right_height = -1
-                else:
-                    right_height = node.right.height
-                node.balance_factor= abs(left_height - right_height)
+                node.balance_factor = self.calc_balance_factor(node)
                 if node.balance_factor > 1:
-                    self.balance_tree(node, parent)
+                    node = self.balance_tree(node)
+                    if parent is not None:
+                        parent.height -= 1
+                        if direct == "left":
+                            parent.left = node
+                        elif direct == "right":
+                            parent.right = node
+                        else:
+                            print("you shouldn't be here!")
+                    else:
+                        self.tree = node
+                
             except TypeError:
                 raise TypeError("BinaryTree: Cannot compare types, " +
                                 str(type(key) + " with " +
                                     str(type(node.key))))
-    def balance_tree(self, node, parent):
+
+    def calc_balance_factor(self, node):
+        if node.left == None:
+            left_height = -1
+        else:
+            left_height = node.left.height
+        if node.right == None:
+            right_height = -1
+        else:
+            right_height = node.right.height
+        return abs(left_height - right_height)
+    
+    def balance_tree(self, node):
         left_height = -1 if node.left == None else node.left.height
         right_height = -1 if node.right == None else node.right.height
         
@@ -115,31 +142,45 @@ class AVLTree(BinaryTree):
             right_height = -1 if node.left.right == None else node.left.right.height
             if left_height > right_height:
                 # Left Left --> Right rotate
-                self.right_rotate(parent)
+                node = self.right_rotate(node)
             else:
                 # Left Right
-                self.left_rotate(node)
-                self.right_rotate(parent)
+                node.left = self.left_rotate(node.left)
+                node = self.right_rotate(node)
+                node.height +=1
+                node.left.height +=1
         else:
             left_height = -1 if node.right.left == None else node.right.left.height
             right_height = -1 if node.right.right == None else node.right.right.height
             if left_height > right_height:
                 # Right Left
-                self.right_rotate(node)
-                self.left_rotate(parent)
+                node.right = self.right_rotate(node.right)
+                node = self.left_rotate(node)
+                node.height +=1
+                node.right.height +=1
             else:
                 # Right Right
-                self.left_rotate(parent)
+                node = self.left_rotate(node)
+        return(node)
         
 
             
 
     def right_rotate(self, node):
         print("Rotating Right!")
-        reconsile = node.left
+        reconsile = node.left.right
         new_root = node.left
         new_root.right = node
+        if reconsile is None:
+            new_root.right.height -= 2
+        else:
+            new_root.right.height -= 1
         new_root.right.left = reconsile
+        new_root.balance_factor = self.calc_balance_factor(new_root)
+        if new_root.left is not None:
+            new_root.left.balance_factor = self.calc_balance_factor(new_root.left)
+        if new_root.right is not None:
+            new_root.right.balance_factor = self.calc_balance_factor(new_root.right)
         return new_root
 
         
@@ -148,7 +189,16 @@ class AVLTree(BinaryTree):
         reconsile = node.right.left
         new_root = node.right
         new_root.left = node
+        if reconsile is None:
+            new_root.left.height -= 2
+        else:
+            new_root.left.height -= 1
         new_root.left.right = reconsile
+        new_root.balance_factor = self.calc_balance_factor(new_root)
+        if new_root.left is not None:
+            new_root.left.balance_factor = self.calc_balance_factor(new_root.left)
+        if new_root.right is not None:
+            new_root.right.balance_factor = self.calc_balance_factor(new_root.right)
         return new_root
 
     
