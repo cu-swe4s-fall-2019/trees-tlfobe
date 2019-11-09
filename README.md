@@ -36,3 +36,17 @@ python insert_key_value_pairs.py --data_struct hash --data_file rand.txt --n_val
 
 ## Results
 
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_rand_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_rand_1000.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_rand_10000.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_sorted_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_sorted_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/tree_sorted_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_rand_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_rand_1000.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_rand_10000.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_sorted_100.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_sorted_1000.png)
+![alt text](https://github.com/cu-swe4s-fall-2019/trees-tlfobe/blob/insert_key_value_pairs_dev/images/hash_sorted_10000.png)
+
+

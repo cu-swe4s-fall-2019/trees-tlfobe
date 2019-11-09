@@ -8,10 +8,9 @@ import matplotlib.pyplot as plt
 import time
 import random
 import gen_data
+import avl_tree
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
-sys.path.insert(1, "avl_tree")  # noqa: E402
 import hash_tables
-import avl
 
 sys.setrecursionlimit(20000)
 
@@ -69,7 +68,7 @@ def main():
     args = parser.parse_args()
 
     str_to_data_strct_map = {"hash": hash_tables.ChainedHash,
-                             "AVL": avl.AVL, "tree": binary_tree.BinaryTree}
+                             "AVL": avl_tree.AVLTree, "tree": binary_tree.BinaryTree}
 
     data_struct = str_to_data_strct_map[args.data_struct]
     # Load in Data
