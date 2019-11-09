@@ -10,7 +10,7 @@ import argparse
 import matplotlib
 matplotlib.use('Agg')
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
-import hash_tables # noqa: E402
+import hash_tables  # noqa: E402
 
 
 sys.setrecursionlimit(20000)
