@@ -1,18 +1,19 @@
+import hash_tables
+import avl_tree
+import gen_data
+import random
+import time
+import matplotlib.pyplot as plt
 import binary_tree
 import sys
 import os
 import argparse
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-import time
-import random
-import gen_data
-import avl_tree
 sys.path.insert(1, "hash-tables-tlfobe")  # noqa: E402
-import hash_tables
 
 sys.setrecursionlimit(20000)
+
 
 def get_key_value_pairs_from_file(file, n_values):
     if not os.path.isfile(file):
@@ -68,12 +69,14 @@ def main():
     args = parser.parse_args()
 
     str_to_data_strct_map = {"hash": hash_tables.ChainedHash,
-                             "AVL": avl_tree.AVLTree, "tree": binary_tree.BinaryTree}
+                             "AVL": avl_tree.AVLTree,
+                             "tree": binary_tree.BinaryTree}
 
     data_struct = str_to_data_strct_map[args.data_struct]
     # Load in Data
 
-    keys, values = get_key_value_pairs_from_file(args.data_file, int(args.n_values))
+    keys, values = get_key_value_pairs_from_file(
+        args.data_file, int(args.n_values))
 
     # Time it takes to insert
 
@@ -110,30 +113,29 @@ def main():
         t1 = time.time()
         not_in_db_times.append(t1 - t0)
         assert val == -1
-    
+
     plt.subplots_adjust(wspace=5)
-    fig, ax = plt.subplots(nrows=1, ncols=3, dpi=500, figsize=[15,5])
+    fig, ax = plt.subplots(nrows=1, ncols=3, dpi=500, figsize=[15, 5])
     fig.tight_layout()
     # fig = plt.figure(figsize=(10,3), dpi=300)
     # ax = fig.add_subplot(1,1,1)
     # ax.boxplot([add_times, search_times, not_in_db_times])
     #
-    # names = [args.data_struct + plot_type for plot_type in [" Add Time", " Search Time", " Full Search Time"]]
+    # names = [args.data_struct +
+    #          plot_type for plot_type in
+    #          [" Add Time", " Search Time", " Full Search Time"]]
     # ax.xticks(names)
 
     ax[0].boxplot(add_times)
-    ax[0].set_xlabel(args.data_struct+ " Add Time")
+    ax[0].set_xlabel(args.data_struct + " Add Time")
     ax[0].set_ylabel("Time (seconds)")
     ax[0].tick_params(labelsize=6)
     ax[1].boxplot(search_times)
-    ax[1].set_xlabel(args.data_struct+ " Search Time")
+    ax[1].set_xlabel(args.data_struct + " Search Time")
     ax[1].tick_params(labelsize=6)
     ax[2].boxplot(not_in_db_times)
-    ax[2].set_xlabel(args.data_struct+ " Full Search Time")
+    ax[2].set_xlabel(args.data_struct + " Full Search Time")
     ax[2].tick_params(labelsize=6)
-
-
-
 
     if args.outfile.split(".")[-1] != "png":
         args.outfile += ".png"

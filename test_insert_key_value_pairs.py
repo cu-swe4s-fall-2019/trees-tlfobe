@@ -43,7 +43,6 @@ class TestGetKeyValuePairsFromFile(unittest.TestCase):
         assert len(keys) == 40
         assert len(values) == 40
 
-
     def tearDown(self):
         os.remove('test.txt')
         os.remove('test2.txt')
