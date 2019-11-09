@@ -14,3 +14,5 @@ before_install:
 script:
     - pycodestyle *.py
     - python -m unittest test_binary_tree.py
+    - python -m unittest test_avl_tree.py
+    - python -m unittest test_gen_data.py
