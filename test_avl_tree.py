@@ -1,6 +1,7 @@
 import avl_tree
 import unittest
 
+
 class TestAVLNode(unittest.TestCase):
     def test_single_node(self):
         node = avl_tree.AVLNode(10)
@@ -63,7 +64,7 @@ class TestAVLTree(unittest.TestCase):
 
     def test_avl_tree_init_key_value(self):
         bt = avl_tree.AVLTree(keys=[1, 2, 3, 4, 0], values=[
-                                    'one', 'two', 'three', 'four', 'zero'])
+            'one', 'two', 'three', 'four', 'zero'])
         assert bt.tree.key == 2
         assert bt.tree.right.key == 3
         assert bt.tree.right.right.key == 4
@@ -77,7 +78,7 @@ class TestAVLTree(unittest.TestCase):
 
     def test_avl_tree_search(self):
         bt = avl_tree.AVLTree(keys=[1, 2, 3, 4, 0], values=[
-                                    'one', 'two', 'three', 'four', 'zero'])
+            'one', 'two', 'three', 'four', 'zero'])
         assert bt.search(1) == 'one'
         assert bt.search(2) == 'two'
         assert bt.search(3) == 'three'
@@ -86,7 +87,7 @@ class TestAVLTree(unittest.TestCase):
 
     def test_avl_tree_search_no_find(self):
         bt = avl_tree.AVLTree(keys=[1, 2, 3, 4, 0], values=[
-                                    'one', 'two', 'three', 'four', 'zero'])
+            'one', 'two', 'three', 'four', 'zero'])
         assert bt.search(11) == -1
         assert bt.search(100) == -1
         bt.insert(11, value='eleven')
@@ -96,13 +97,13 @@ class TestAVLTree(unittest.TestCase):
 
     def test_avl_tree_mixed_key_value_no_value(self):
         bt = avl_tree.AVLTree(keys=[1, 2, 3, 4, 0], values=[
-                                    'one', 'two', 'three', 'four', 'zero'])
+            'one', 'two', 'three', 'four', 'zero'])
         bt.insert(23)
         assert bt.search(23) == 23
         assert bt.search(1) == 'one'
 
     def test_avl_tree_left_rotate(self):
-        avl = avl_tree.AVLTree([1,2,3,4,5])
+        avl = avl_tree.AVLTree([1, 2, 3, 4, 5])
         assert avl.tree.value == 2
         assert avl.tree.left.value == 1
         assert avl.tree.right.value == 4
@@ -110,7 +111,7 @@ class TestAVLTree(unittest.TestCase):
         assert avl.tree.right.right.value == 5
 
     def test_avl_tree_right_rotate(self):
-        avl = avl_tree.AVLTree([5,4,3,2,1])
+        avl = avl_tree.AVLTree([5, 4, 3, 2, 1])
         assert avl.tree.value == 4
         assert avl.tree.left.value == 2
         assert avl.tree.right.value == 5
@@ -118,15 +119,13 @@ class TestAVLTree(unittest.TestCase):
         assert avl.tree.left.right.value == 3
 
     def test_avl_tree_test_right_left_rotation(self):
-        avl = avl_tree.AVLTree([5,8,6])
+        avl = avl_tree.AVLTree([5, 8, 6])
         assert avl.tree.value == 6
         assert avl.tree.right.value == 8
         assert avl.tree.left.value == 5
 
-        
     def test_avl_tree_test_left_right_rotation(self):
-        avl = avl_tree.AVLTree([8,5,6])
+        avl = avl_tree.AVLTree([8, 5, 6])
         assert avl.tree.value == 6
         assert avl.tree.right.value == 8
         assert avl.tree.left.value == 5
-
